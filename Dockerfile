@@ -1,11 +1,14 @@
 FROM python:3.9-slim
 WORKDIR /app
 
-# Copy semua file
+# Update pip dulu
+RUN pip install --upgrade pip
+
+# Install dependencies secara terpisah
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade-strategy=only-if-needed -r requirements.txt
+
+# Copy kode
 COPY . .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Jalankan bot
 CMD ["python", "trojanbot.py"]
