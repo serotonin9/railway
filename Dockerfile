@@ -1,16 +1,11 @@
-FROM python:3.10-slim  # Ganti ke Python 3.10 yang lebih stabil
-
+FROM python:3.10-slim
 WORKDIR /app
-
-# Install dependencies satu per satu untuk isolasi error
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir python-telegram-bot==20.3 && \
-    pip install --no-cache-dir solders==0.14.4 && \
-    pip install --no-cache-dir requests==2.31.0 && \
-    pip install --no-cache-dir solana==0.29.0 && \
-    pip install --no-cache-dir base58==2.1.1
-
+    pip install python-telegram-bot==20.3 && \
+    pip install solders==0.14.4 && \
+    pip install requests==2.31.0 && \
+    pip install solana==0.29.0 && \
+    pip install base58==2.1.1
 COPY . .
-
 CMD ["python", "trojanbot.py"]
