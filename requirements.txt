@@ -1,0 +1,8 @@
+# File: requirements.txt (updated)
+python-telegram-bot==20.3
+solders==0.14.4
+base58==2.1.1
+requests==2.31.0
+solana==0.29.0
+asyncio==3.4.3
+python-dotenv==1.0.0
