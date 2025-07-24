@@ -1,2 +1,1 @@
-# File: Procfile
-web: python trojanbot.py
+worker: python trojanbot.py
