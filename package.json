@@ -1,0 +1,6 @@
+{
+  "name": "trojan-bot",
+  "scripts": {
+    "start": "python trojanbot.py"
+  }
+}
