@@ -3,4 +3,3 @@ solders==0.14.4
 requests==2.31.0
 solana==0.29.0
 base58==2.1.1
---upgrade-strategy=only-if-needed
