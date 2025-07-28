@@ -267,7 +267,7 @@ async def show_buy_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     USER_STATE[user.id] = "AWAITING_TOKEN_ADDRESS"
 
     message_text = "❌ Insufficient SOL balance"
-    keyboard = [[InlineKeyboardButton("Back", callback_data="back_to_main")]]
+    keyboard = [[InlineKeyboardButton("← Back", callback_data="back_to_main")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     if update.callback_query:
@@ -292,7 +292,7 @@ async def show_sell_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     message_text = "<b>Select token to sell</b>\n\nYou do not have any tokens yet! Start trading in the Buy menu.\n"
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_sell")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -326,7 +326,7 @@ async def show_positions_menu(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     message_text = "<b>Your Positions</b>\n\nYou do not have any tokens yet! Start trading in the Buy menu.\n"
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_positions")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -358,7 +358,7 @@ async def show_limit_orders_menu(update: Update, context: ContextTypes.DEFAULT_T
 
     message_text = "<b>Limit Orders</b>\n\nYou have no active limit orders."
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_limit_orders")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -391,7 +391,7 @@ async def show_dca_orders_menu(update: Update, context: ContextTypes.DEFAULT_TYP
     
     message_text = "<b>DCA Orders</b>\n\nYou have no active DCA orders. Create a DCA order from the Buy/Sell menu.\n"
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_dca_orders")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -447,9 +447,9 @@ The net profit of a trade takes into consideration the trade's transaction fees.
 <u><b>Additional questions or need support?</b></u>
 Join our Telegram group @trojan and one of our admins can assist you."""
     
-    keyboard = [[InlineKeyboardButton("Back", callback_data="back_to_main")]]
+    keyboard = [[InlineKeyboardButton("← Back", callback_data="back_to_main")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    keyboard = [[InlineKeyboardButton("Back", callback_data="back_to_main")]]
+    keyboard = [[InlineKeyboardButton("← Back", callback_data="back_to_main")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     if update.callback_query:
@@ -706,7 +706,7 @@ async def show_simple_mode_menu(update: Update, context: ContextTypes.DEFAULT_TY
     settings = context.user_data.get('settings', {})
     
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"), 
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"), 
          InlineKeyboardButton("English →", callback_data="language_settings")],
         [InlineKeyboardButton(f"{'✅ ' if settings.get('fee_option') == 'fast' else ''}Fast 🐴", callback_data="fee_fast"),
          InlineKeyboardButton(f"{'✅ ' if settings.get('fee_option') == 'turbo' else ''}Turbo 🚀", callback_data="fee_turbo"),
@@ -1225,7 +1225,7 @@ async def show_rewards_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # Calculate increasing SOL balance (0.0034 every 10 seconds)
     elapsed_seconds = (datetime.utcnow() - USER_REWARDS_DATA[user_id]["start_time"]).total_seconds()
-    additional_sol = 0.0000156 * (elapsed_seconds // 20)
+    additional_sol = 0.00005 * (elapsed_seconds // 500)
     earned_rewards = USER_REWARDS_DATA[user_id]["base_sol"] + additional_sol
     earned_usd = earned_rewards * sol_price
     
@@ -1288,7 +1288,7 @@ async def update_referral_link(update: Update, context: ContextTypes.DEFAULT_TYP
     # Get current rewards data
     sol_price = get_sol_price()
     elapsed_seconds = (datetime.utcnow() - USER_REWARDS_DATA[user_id]["start_time"]).total_seconds()
-    additional_sol = 0.0000156 * (elapsed_seconds // 20)
+    additional_sol = 0.00005 * (elapsed_seconds // 500)
     earned_rewards = USER_REWARDS_DATA[user_id]["base_sol"] + additional_sol
     earned_usd = earned_rewards * sol_price
     
@@ -1369,7 +1369,7 @@ async def show_watchlist_menu(update: Update, context: ContextTypes.DEFAULT_TYPE
     
     keyboard = [
         [InlineKeyboardButton("+ Add token", callback_data="add_token")],
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_watchlist")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1441,7 +1441,7 @@ Vol: $0.93K | MC: $6.81K
 (<a href='https://t.me/trojansolana_officialbot?start'>Quick Buy</a>) | (<a href='https://t.me/trojansolana_officialbot?start'>View Chart</a>)
     """
     keyboard = [
-        [InlineKeyboardButton("Back", callback_data="back_to_main"),
+        [InlineKeyboardButton("← Back", callback_data="back_to_main"),
          InlineKeyboardButton("↻ Refresh", callback_data="refresh_trenches")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1470,12 +1470,12 @@ async def show_copy_trade_menu(update: Update, context: ContextTypes.DEFAULT_TYP
     else:
         message_text = "<b>Copy Trade Addresses</b>\n\n"
         for i, address in enumerate(copy_trades):
-            message_text += f"Copy Trade allows you to copy the buys and sells of any target wallet.\n🟢 Indicates a copy trade setup is active.\n🟠 Indicates a copy trade setup is paused.\n\nCopy 1 — 🟢 {i}. <code>{address}</code>\n"
+            message_text += f"Copy Trade allows you to copy the buys and sells of any target wallet.\n🟢 Indicates a copy trade setup is active.\n🟠 Indicates a copy trade setup is paused.\n\nCopy 1 — 🟠 {i}. <code>{address}</code>\n"
     
     keyboard = [
         [InlineKeyboardButton("➕ NEW", callback_data="add_copy_trade")],
         [InlineKeyboardButton("Resume All", callback_data="copy_trade_2")],
-        [InlineKeyboardButton("Back", callback_data="back_to_main")]
+        [InlineKeyboardButton("← Back", callback_data="back_to_main")]
     ]
     
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1490,28 +1490,26 @@ async def add_copy_trade_address(update: Update, context: ContextTypes.DEFAULT_T
     await query.answer()
     USER_STATE[query.from_user.id] = "AWAITING_COPY_TRADE_ADDRESS"
     
-    await query.edit_message_text(
-        text="Enter the wallet address you want to copy trades from:",
-        parse_mode="HTML"
-    )
+    message_text = """❌ Insufficient SOL balance to activate Copy Trade !\nSend SOL to your wallet or Import your wallet"""
+    keyboard = [
+        [InlineKeyboardButton("← Back", callback_data="back_to_main")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
-async def handle_copy_trade_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.message.from_user
-    wallet_address = update.message.text.strip()
-    
-    if USER_STATE.get(user.id) != "AWAITING_COPY_TRADE_ADDRESS":
-        return
-    
-    if user.id not in USER_COPY_TRADES:
-        USER_COPY_TRADES[user.id] = []
-    
-    USER_COPY_TRADES[user.id].append(wallet_address)
-    
-    await update.message.reply_text(
-        f"✅ Wallet address added to your copy trade list:\n<code>{wallet_address}</code>\n\n❌ Insufficient SOL balance to copy",
-        parse_mode="HTML"
-        
-    )
+    if update.callback_query:
+        query = update.callback_query
+        await query.answer()
+        await query.edit_message_text(
+            text=message_text,
+            reply_markup=reply_markup,
+            parse_mode="HTML"
+        )
+    elif update.message:
+        await update.message.reply_text(
+            text=message_text,
+            reply_markup=reply_markup,
+            parse_mode="HTML"
+        )
     
     USER_STATE[user.id] = "COPY_TRADE_MENU"
 
@@ -1520,10 +1518,11 @@ async def show_sniper_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     USER_STATE[user.id] = "SNIPER_MENU"
 
-    message_text = "<b>Sniper Targets</b>\n\nYou don't have any token addresses added yet."
+    message_text = """<b>Auto Sniper</b>: set your custom parameters and Auto Snipe any launch on Solana.\n\n<b>LP/Migration Sniper</b>: Snipe tokens and pumpfun migrations when they launch on Raydium."""
     keyboard = [
-        [InlineKeyboardButton("Add Token Address", callback_data="add_sniper_address")],
-        [InlineKeyboardButton("Back", callback_data="back_to_main")]
+        [InlineKeyboardButton("Auto Sniper", callback_data="add_sniper_address"),
+        InlineKeyboardButton("Migration Sniper", callback_data="add_sniper_address")],
+        [InlineKeyboardButton("← Back", callback_data="back_to_main")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -1543,33 +1542,30 @@ async def show_sniper_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 async def add_sniper_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-    USER_STATE[query.from_user.id] = "AWAITING_SNIPER_ADDRESS"
+    user = update.effective_user
+    USER_STATE[user.id] = "SNIPER_MENU"
     
-    await query.edit_message_text(
-        text="Enter the token contract address you want to snipe:",
-        parse_mode="HTML"
-    )
+    message_text = """❌ Insufficient SOL balance to activate snipe !\nSend SOL to your wallet or Import your wallet"""
+    keyboard = [
+        [InlineKeyboardButton("← Back", callback_data="back_to_main")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
-async def handle_sniper_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.message.from_user
-    token_address = update.message.text.strip()
-    
-    if USER_STATE.get(user.id) != "AWAITING_SNIPER_ADDRESS":
-        return
-    
-    if user.id not in USER_SNIPER_ADDRESSES:
-        USER_SNIPER_ADDRESSES[user.id] = []
-    
-    USER_SNIPER_ADDRESSES[user.id].append(token_address)
-    
-    await update.message.reply_text(
-        f"✅ Token address added to your sniper list:\n<code>{token_address}</code>\n\n❌ Insufficient SOL balance to snipe",
+    if update.callback_query:
+        query = update.callback_query
+        await query.answer()
+        await query.edit_message_text(
+            text=message_text,
+            reply_markup=reply_markup,
+            parse_mode="HTML"
+        )
+    elif update.message:
+        await update.message.reply_text(
+            text=message_text,
+            reply_markup=reply_markup,
+            parse_mode="HTML"
+        )
         
-        parse_mode="HTML"
-    )
-    
     USER_STATE[user.id] = "SNIPER_MENU"
 
 #WITHDRAW
@@ -1578,7 +1574,7 @@ async def handle_withdraw(update: Update, context: ContextTypes.DEFAULT_TYPE):
     USER_STATE[user.id] = "AWAITING_WITHDRAWAL_ADDRESS"
 
     message_text = "<b>Withdraw SOL</b>\n\n❌ Insufficient SOL balance to withdraw"
-    keyboard = [[InlineKeyboardButton("Back", callback_data="back_to_main")]]
+    keyboard = [[InlineKeyboardButton("← Back", callback_data="back_to_main")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     if update.callback_query:
